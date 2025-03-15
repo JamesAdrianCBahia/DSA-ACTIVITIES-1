@@ -1,44 +1,167 @@
-#include <iostream>
 
+#include <iostream>
 using namespace std;
 
-// Create structure for the Node
-typedef struct Node {
-    string songName;
-    Node *link;
-} Node;
+typedef struct Node{
+        string songName;
+        Node *link;
+}Node;
 
-// Create a new node
 Node* createNode(string data) {
-    Node* newNode = new Node; // Create new node instance
-    newNode->songName = data; // Assign data
-    newNode->link = nullptr;  // Assign link as nullptr
-    return newNode;           // Return the created node
+    Node* newNode = new Node;
+    newNode->songName = data;
+    newNode->link = NULL;
+    return newNode;
 }
-
-// Traverse linked list
-void traverse(Node* head) {
-    Node* temp = head; // Start from the head node
-
-    cout << "My playlist:" << endl;
-    while (temp != nullptr) { // Loop through the nodes
-        cout << temp->songName << " -> "; // Print data
-        temp = temp->link; // Move to the next node
+void traverse (Node *head){
+    Node *temp = new Node;
+    temp = head;
+    
+    cout << "My Playlist" <<endl;
+    while(temp !=NULL){
+        cout << temp->songName<< "->" <<endl;
+        if(temp->link == NULL){
+            cout << "NULL" << endl;
     }
-    cout << "NULL" << endl; // End of the list
+    temp = temp->link;
 }
+}
+Node *insertAtEnd(string data, Node *head){
+    if(head == NULL){
+        Node *newNode = createNode(data);
+        head = newNode;
+        cout << "A new node has been insterted at the end \n" << endl;
+        return head;
+    }
+    Node *temp = new Node;
+    temp = head;
+    
+    while (temp->link != NULL){
+        temp = temp->link;
+    }
+    Node *newNode = createNode(data);
+    temp->link = newNode;
+    
+    cout << "A new node has been insterted at the end \n" << endl;
+    return head;
+}
+Node *instertAtBeginning(string data, Node *head){
+    Node *newNode = createNode(data);
+    newNode->link = head;
+    
+    head = newNode;
+    
+    cout << "A new node has been inserted at the beginning \n" <<endl;
+    return head;
+}
+string insertAfter(string after, string data, Node *head){
+    Node *temp = new Node; 
+    temp = head; 
+    
+    while(temp->songName.compare(after) !=0){
+        if(temp == NULL){
+            return "No such song exist, please try again.";
+        }
+        
+        temp = temp->link;
+    }
+    Node *newNode = createNode(data);
+    newNode->link = temp->link;
+    temp->link = newNode;
+    
+    return "An new node has been added after" + after + "\n";
+}
+string deleteAtEnd(Node *head){
+    if(head == NULL){ 
+        return "The linked list is empty \n";
+    }
 
-int main() {
-    // Create a linked list
-    Node* sample = createNode("Heaven Knows by Orange and Lemon");
+    if(head->link == NULL){ 
+        delete head;
+        return "The head has been deleted \n";
+    }
 
-    // Add more nodes if needed, for example:
-    Node* second = createNode("Another Song");
-    sample->link = second; // Link the first node to the second node
+    Node *temp = new Node; 
+    temp = head; 
 
-    // Traverse and print the playlist
-    traverse(sample);
+    while(temp->link->link != NULL){ 
+        temp = temp->link;
+    }
 
+    temp->link = NULL; 
+
+    return "A node has been deleted at the end \n";
+}
+Node *deleteFromBeginning(Node *head){
+    if(head == NULL){
+        cout << "The linked list is empty \n" << endl;
+        return NULL;
+    }
+    
+    if(head->link == NULL){
+        delete head;
+    }
+    head = head->link;
+    
+    cout << "A node has been delete from the beginning \n" << endl;
+    
+    return head;
+}
+Node *deleteFromGivenNode(string givenNode, Node *head){
+    if(head == NULL){
+        cout << "The Node" + givenNode + " has been deleted. \n" << endl;
+        return head;
+    }
+    Node *temp = new Node;
+    Node *next = new Node;
+    temp = head;
+    next = temp->link;
+    
+    while(next->songName.compare(givenNode) !=0){
+        if(temp == NULL){
+            cout << "No Such node exist. \n" << endl;
+            return head;
+    }
+    next = next->link;
+    temp = temp->link;
+}
+    temp->link = next->link;
+    cout << "The Node " + givenNode + " has been deleted. \n" << endl;
+    return head;
+}
+int main()
+{
+    Node *head = createNode ("Sanctuary by Joji");
+    traverse(head);
+    head = insertAtEnd("flowers by hana hope", head);
+    traverse(head);
+    head = insertAtEnd("Feel it by d4vd", head);
+    traverse(head);
+    head = insertAtEnd("Ma Meilleure Ennemie by Arcane,Stromae,Pomme", head);
+    traverse(head);
+    
+    head = instertAtBeginning ("Your Color by HOYO-MiX", head);
+    traverse(head);
+    head = instertAtBeginning ("Color Your NIght by Chewie Melodies,Pealeaf", head);
+    traverse(head);
+    head = instertAtBeginning ("Sunflower by Post Malone,Swae Lee", head);
+    traverse(head);
+    head = instertAtBeginning ("If I Can Stop One Heart From Breaking by Robin,HOYO-MiX,Chevy", head);
+    traverse(head);
+    
+    insertAfter ("Color Your NIght by Chewie Melodies,Pealeaf","Bakit by Maki", head);
+    traverse(head);
+    insertAfter ("Sunflower by Post Malone,Swae Lee","Misteryoso by Cup of joe", head);
+    traverse(head);
+    insertAfter ("If I Can Stop One Heart From Breaking by Robin,HOYO-MiX,Chevy","Saan by maki", head);
+    traverse(head);
+    
+    cout << deleteAtEnd(head);
+    traverse(head);
+    head = deleteFromBeginning(head);
+    traverse(head);
+    head = deleteFromGivenNode("Bakit by Maki",head);
+    traverse(head);
+    
     return 0;
 }
-

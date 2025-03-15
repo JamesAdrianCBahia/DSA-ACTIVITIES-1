@@ -1,4 +1,3 @@
-
 #include <iostream>
 using namespace std;
 
@@ -131,36 +130,36 @@ Node *deleteFromGivenNode(string givenNode, Node *head){
 }
 int main()
 {
-    Node *head = createNode ("Sanctuary by Joji");
+    Node *head = createNode ("Isa lang by arthur nery");
     traverse(head);
-    head = insertAtEnd("flowers by hana hope", head);
+    head = insertAtEnd("take all the love by arthur nery", head);
     traverse(head);
-    head = insertAtEnd("Feel it by d4vd", head);
+    head = insertAtEnd("pagsamo by arthur nery", head);
     traverse(head);
-    head = insertAtEnd("Ma Meilleure Ennemie by Arcane,Stromae,Pomme", head);
-    traverse(head);
-    
-    head = instertAtBeginning ("Your Color by HOYO-MiX", head);
-    traverse(head);
-    head = instertAtBeginning ("Color Your NIght by Chewie Melodies,Pealeaf", head);
-    traverse(head);
-    head = instertAtBeginning ("Sunflower by Post Malone,Swae Lee", head);
-    traverse(head);
-    head = instertAtBeginning ("If I Can Stop One Heart From Breaking by Robin,HOYO-MiX,Chevy", head);
+    head = insertAtEnd("higa by arthur nery", head);
     traverse(head);
     
-    insertAfter ("Color Your NIght by Chewie Melodies,Pealeaf","Bakit by Maki", head);
+    head = instertAtBeginning ("binhi by arthur nery", head);
     traverse(head);
-    insertAfter ("Sunflower by Post Malone,Swae Lee","Misteryoso by Cup of joe", head);
+    head = instertAtBeginning ("happy w,u by arthur nery", head);
     traverse(head);
-    insertAfter ("If I Can Stop One Heart From Breaking by Robin,HOYO-MiX,Chevy","Saan by maki", head);
+    head = instertAtBeginning ("sigundo siguro by arthur nery", head);
+    traverse(head);
+    head = instertAtBeginning ("o ninanais by arthur nery", head);
+    traverse(head);
+    
+    insertAfter ("Isa lang by arthur nery","palagi by tj monterde", head);
+    traverse(head);
+    insertAfter ("take all the love by arthur nery","dating tayo by tj monterde", head);
+    traverse(head);
+    insertAfter ("pagsamo by arthur nery","ikaw at ako by tj monterde", head);
     traverse(head);
     
     cout << deleteAtEnd(head);
     traverse(head);
     head = deleteFromBeginning(head);
     traverse(head);
-    head = deleteFromGivenNode("Bakit by Maki",head);
+    head = deleteFromGivenNode("ikaw at ako by tj monterde",head);
     traverse(head);
     
     return 0;
